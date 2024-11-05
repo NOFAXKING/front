@@ -1,5 +1,13 @@
+'use client';
+import { useQuery } from '@tanstack/react-query'
+
+const fetchTodoList = async () => {
+  const response = await fetch('http://localhost:8000/todos/')
+  return response.json()
+}
 
 export default function Home() {
+  const info = useQuery({ queryKey: ['todos'], queryFn: fetchTodoList })
   return (
     <>
       <h1 className="flex justify-center font-medium text-3xl mb-10">Well come back UserName</h1>
@@ -13,12 +21,9 @@ export default function Home() {
           <div>
             <h1 className="font-extrabold">List of Tasks</h1>
             <ul>
-              <li>
-                First task
-              </li>
-              <li>
-                Second task
-              </li>
+              {info.data?.map((todo: { id: number; title: string; description: string }) => (
+                <li key={todo.id}>{todo.title}</li>
+              ))}
             </ul>
           </div>
         </div>
