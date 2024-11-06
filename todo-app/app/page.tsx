@@ -3,12 +3,12 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { useState } from 'react';
 
 const fetchTodoList = async () => {
-  const response = await fetch('http://localhost:8000/todos/')
+  const response = await fetch('https://back-ih3xrzr5y-temgoua-arthurs-projects.vercel.app/')
   return response.json()
 }
 
 const postTodo = async (todoData: { title: string; description: string }) => {
-  await fetch(`http://localhost:8000/todos/`, {
+  await fetch(`https://back-ih3xrzr5y-temgoua-arthurs-projects.vercel.app/`, {
     body: JSON.stringify(todoData),
     headers: {
       'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ const postTodo = async (todoData: { title: string; description: string }) => {
   })
 }
 const deleteTodo = async (id: number) => {
-  await fetch(`http://localhost:8000/todos/${id}/`, {
+  await fetch(`https://back-ih3xrzr5y-temgoua-arthurs-projects.vercel.app/${id}/`, {
     headers: {
       'Content-Type': 'application/json',
     },
