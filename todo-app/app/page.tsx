@@ -2,22 +2,31 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useState } from 'react';
 
+let url = '';
+
+if (process.env.NODE_ENV === 'development') {
+  url = 'http://localhost:8000/todos/';
+} else if (process.env.NODE_ENV === 'production') {
+  url = `https://back-ih3xrzr5y-temgoua-arthurs-projects.vercel.app/`;
+}
+
 const fetchTodoList = async () => {
-  const response = await fetch('https://back-ih3xrzr5y-temgoua-arthurs-projects.vercel.app/')
+  const response = await fetch(`${url}`)
   return response.json()
 }
 
 const postTodo = async (todoData: { title: string; description: string }) => {
-  await fetch(`https://back-ih3xrzr5y-temgoua-arthurs-projects.vercel.app/`, {
+  await fetch(`${url}`, {
     body: JSON.stringify(todoData),
     headers: {
       'Content-Type': 'application/json',
+      // 'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwOTk4NDE4LCJpYXQiOjE3MzA5OTgxMTgsImp0aSI6IjM5ZTllYzM4YjY5MTRlMzc4MmFiNGNkYTkwMTU5ZWEwIiwidXNlcl9pZCI6Mn0.9Aq3qacxZty9b5FOfpFCosymSeLJ_KHapjbaqQ1W0A4`,
     },
     method: "POST",
   })
 }
 const deleteTodo = async (id: number) => {
-  await fetch(`https://back-ih3xrzr5y-temgoua-arthurs-projects.vercel.app/${id}/`, {
+  await fetch(`${url}${id}/`, {
     headers: {
       'Content-Type': 'application/json',
     },
