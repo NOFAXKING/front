@@ -7,7 +7,7 @@ let url = '';
 if (process.env.NODE_ENV === 'development') {
   url = 'http://localhost:8000/todos/';
 } else if (process.env.NODE_ENV === 'production') {
-  url = `https://back-ih3xrzr5y-temgoua-arthurs-projects.vercel.app/`;
+  url = `https://back-b9bvs4gcd-temgoua-arthurs-projects.vercel.app/`;
 }
 
 const fetchTodoList = async () => {
